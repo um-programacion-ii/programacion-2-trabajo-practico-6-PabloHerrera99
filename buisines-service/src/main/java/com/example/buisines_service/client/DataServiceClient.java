@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @FeignClient(name = "data-service", url = "${data.service.url")
-public class DataServiceClient {
+public interface DataServiceClient {
 
     @GetMapping("/data/productos")
     List<ProductoDTO> obtenerTodosLosProductos();
@@ -30,6 +30,12 @@ public class DataServiceClient {
 
     @GetMapping("/data/categorias")
     List<CategoriaDTO> obtenerTodasLasCategorias();
+
+    @PutMapping("data/categorias/{id}")
+    CategoriaDTO actualizarCategoria(@PathVariable Long id,  @RequestBody CategoriaDTO categoriaDTO);
+
+    @DeleteMapping("data/categorias/{id}")
+    void eliminarCategoria(@PathVariable Long id);
 
     @GetMapping("/data/inventario/stock-bajo")
     List<InventarioDTO> obtenerProductosConStockBajo();
