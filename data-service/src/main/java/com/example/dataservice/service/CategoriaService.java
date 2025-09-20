@@ -5,9 +5,10 @@ import com.example.dataservice.entity.Categoria;
 import java.util.List;
 
 public interface CategoriaService {
-    Categoria save(Categoria categoria);
-    Categoria update(Long id, Categoria categoria);
-    void delete(Long id);
-    Categoria findById(Long id);
-    List<Categoria> findAll();
+    Categoria guardar(Categoria categoria);
+    Categoria actualizar(Long id, Categoria categoria);
+    void eliminar(Long id);
+    Categoria buscarPorId(Long id);
+    List<Categoria> buscarCategoriasConProductos();
+    List<Categoria> obtenerTodos();
 }

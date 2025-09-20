@@ -45,7 +45,6 @@ public class ProductoBusinessService {
     }
 
     public ProductoDTO crearProducto(ProductoRequest request) {
-        // Validaciones de negocio
         validarProducto(request);
 
         try {
@@ -61,16 +60,46 @@ public class ProductoBusinessService {
         try {
             return dataServiceClient.actualizarProducto(id, request);
         } catch (FeignException e) {
-            log.error("Error al actualizar producto del microservicio de datos", e);
+            log.error("Error al actualizar el producto del microservicio de datos", e);
             throw new MicroserviceCommunicationException("Error de comunicación con el servicio de datos");
         }
     }
 
-    public void eliminarCategoria(Long id) {
+    public void eliminarProducto(Long id) {
         try {
             dataServiceClient.eliminarProducto(id);
         } catch (FeignException e) {
-            log.error("Error al eliminar categoria del microservicio de datos", e);
+            log.error("Error al eliminar el producto del microservicio de datos", e);
+            throw new MicroserviceCommunicationException("Error de comunicación con el servicio de datos");
+        }
+    }
+
+    public List<ProductoDTO> obtenerProductosPorCategoria(String nombreCategoria) {
+        try {
+            return dataServiceClient.obtenerProductosPorCategoria(nombreCategoria);
+        } catch (FeignException e) {
+            log.error("Error al obtener productos por categoría del data-service", e);
+            throw new MicroserviceCommunicationException("Error de comunicación con el servicio de datos");
+        }
+    }
+
+    public List<ProductoDTO> obtenerProductosConStockBajo() {
+        try {
+            return dataServiceClient.obtenerProductosConStockBajo();
+        } catch (FeignException e) {
+            log.error("Error al obtener productos con stock bajo del data-service", e);
+            throw new MicroserviceCommunicationException("Error de comunicación con el servicio de datos");
+        }
+    }
+
+    public BigDecimal calcularValorTotalInventario() {
+        try {
+            List<ProductoDTO> productos = dataServiceClient.obtenerTodosLosProductos();
+            return productos.stream()
+                    .map(p -> p.getPrecio().multiply(BigDecimal.valueOf(p.getStock())))
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        } catch (FeignException e) {
+            log.error("Error al calcular valor total del inventario desde data-service", e);
             throw new MicroserviceCommunicationException("Error de comunicación con el servicio de datos");
         }
     }

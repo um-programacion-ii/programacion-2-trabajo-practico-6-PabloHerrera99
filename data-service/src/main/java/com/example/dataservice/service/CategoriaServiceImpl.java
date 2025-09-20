@@ -16,12 +16,12 @@ public class CategoriaServiceImpl implements CategoriaService{
     }
 
     @Override
-    public Categoria save(Categoria categoria){
+    public Categoria guardar(Categoria categoria){
         return categoriaRepository.save(categoria);
     }
 
     @Override
-    public Categoria update(Long id, Categoria categoria){
+    public Categoria actualizar(Long id, Categoria categoria){
         if(!categoriaRepository.existsById(id)){
             throw new CategoriaNoEncontradaException(id);
         }
@@ -30,7 +30,7 @@ public class CategoriaServiceImpl implements CategoriaService{
     }
 
     @Override
-    public void delete(Long id){
+    public void eliminar(Long id){
         if (!categoriaRepository.existsById(id)){
             throw new CategoriaNoEncontradaException(id);
         }
@@ -38,12 +38,17 @@ public class CategoriaServiceImpl implements CategoriaService{
     }
 
     @Override
-    public Categoria findById(Long id){
+    public Categoria buscarPorId(Long id){
         return categoriaRepository.findById(id).orElseThrow(()->new CategoriaNoEncontradaException(id));
     }
 
     @Override
-    public List<Categoria> findAll(){
+    public List<Categoria> buscarCategoriasConProductos() {
+        return categoriaRepository.findCategoriasConProductos();
+    }
+
+    @Override
+    public List<Categoria> obtenerTodos(){
         return categoriaRepository.findAll();
     }
 }

@@ -6,10 +6,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface InventarioService {
-    BigDecimal calculateTotalValue();
-    Inventario save(Inventario inventario);
-    Inventario update(Long id, Inventario inventario);
-    void delete(Long id);
-    Inventario findById(Long id);
-    List<Inventario> findAll();
+    BigDecimal calcularValorTotal();
+    List<Inventario> obtenerProductosConStockBajo();
+    Inventario guardar(Inventario inventario);
+    Inventario actualizar(Long id, Inventario inventario);
+    void eliminar(Long id);
+    Inventario buscarPorId(Long id);
+    List<Inventario> obtenerTodos();
 }
