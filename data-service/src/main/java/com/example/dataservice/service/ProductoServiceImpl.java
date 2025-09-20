@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductoServiceImpl implements ProductoService{
@@ -18,22 +19,17 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
     @Override
-    public List<Producto> findbyPrecioBetween(BigDecimal min, BigDecimal max){
-        return productoRepository.findbyPrecioBetween(min, max);
+    public List<Producto> encontrarPorPrecioEntre(BigDecimal min, BigDecimal max){
+        return productoRepository.encontrarPorPrecioEntre(min, max);
     }
 
     @Override
-    public List<Producto> findProductosWithLowStock(){
-        return productoRepository.findProductosWithLowStock();
-    }
-
-    @Override
-    public Producto save(Producto producto){
+    public Producto guardar(Producto producto){
         return productoRepository.save(producto);
     }
 
     @Override
-    public Producto update(Long id, Producto producto){
+    public Producto actualizar(Long id, Producto producto){
         if(!productoRepository.existsById(id)){
             throw new ProductoNoEncontradoException(id);
         }
@@ -42,7 +38,7 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
     @Override
-    public void delete(Long id){
+    public void eliminar(Long id){
         if(!productoRepository.existsById(id)){
             throw new ProductoNoEncontradoException(id);
         }
@@ -50,7 +46,13 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
     @Override
-    public List<Producto> findAll(){
+    public List<Producto> obtenerTodos(){
         return productoRepository.findAll();
+    }
+
+    @Override
+    public Producto buscarPorId(Long id) {
+        return productoRepository.findById(id)
+                .orElseThrow(() -> new ProductoNoEncontradoException(id));
     }
 }

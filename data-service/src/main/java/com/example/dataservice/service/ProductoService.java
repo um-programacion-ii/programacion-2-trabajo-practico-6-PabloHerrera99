@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface ProductoService {
-    List<Producto> findbyPrecioBetween(BigDecimal min, BigDecimal max);
-    List<Producto> findProductosWithLowStock();
-    Producto save(Producto producto);
-    Producto update(Long id, Producto producto);
-    void delete(Long id);
-    List<Producto>findAll();
+    List<Producto> encontrarPorPrecioEntre(BigDecimal min, BigDecimal max);
+    Producto guardar(Producto producto);
+    Producto actualizar(Long id, Producto producto);
+    void eliminar(Long id);
+    List<Producto>obtenerTodos();
+    Producto buscarPorId(Long id);
 }

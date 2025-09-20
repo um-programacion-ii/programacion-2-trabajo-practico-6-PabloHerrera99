@@ -17,17 +17,22 @@ public class InventarioServiceImpl implements InventarioService{
     }
 
     @Override
-    public BigDecimal calculateTotalValue(){
+    public BigDecimal calcularValorTotal(){
         return inventarioRepository.calculateTotalValue();
     }
 
     @Override
-    public Inventario save(Inventario inventario){
+    public List<Inventario> obtenerProductosConStockBajo(){
+        return inventarioRepository.obtenerProductosConStockBajo();
+    }
+
+    @Override
+    public Inventario guardar(Inventario inventario){
         return inventarioRepository.save(inventario);
     }
 
     @Override
-    public Inventario update(Long id, Inventario inventario){
+    public Inventario actualizar(Long id, Inventario inventario){
         if(!inventarioRepository.existsById(id)){
             throw new InventarioNoEncontradoException(id);
         }
@@ -36,7 +41,7 @@ public class InventarioServiceImpl implements InventarioService{
     }
 
     @Override
-    public void delete(Long id){
+    public void eliminar(Long id){
         if(!inventarioRepository.existsById(id)){
             throw new InventarioNoEncontradoException(id);
         }
@@ -44,12 +49,12 @@ public class InventarioServiceImpl implements InventarioService{
     }
 
     @Override
-    public Inventario findById(Long id){
+    public Inventario buscarPorId(Long id){
         return inventarioRepository.findById(id).orElseThrow(()-> new InventarioNoEncontradoException(id));
     }
 
     @Override
-    public List<Inventario> findAll(){
+    public List<Inventario> obtenerTodos(){
         return inventarioRepository.findAll();
     }
 
