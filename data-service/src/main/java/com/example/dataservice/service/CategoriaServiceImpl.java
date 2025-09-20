@@ -42,6 +42,7 @@ public class CategoriaServiceImpl implements CategoriaService{
         return categoriaRepository.findById(id).orElseThrow(()->new CategoriaNoEncontradaException(id));
     }
 
+    @Override
     public List<Categoria> buscarCategoriasConProductos() {
         return categoriaRepository.findCategoriasConProductos();
     }
