@@ -1,4 +1,4 @@
-package com.example.dataservice.entitiy;
+package com.example.dataservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
