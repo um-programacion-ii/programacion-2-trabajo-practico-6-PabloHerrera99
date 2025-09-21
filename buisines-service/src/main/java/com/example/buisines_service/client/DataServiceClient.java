@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "data-service", url = "${data.service.url")
+@FeignClient(name = "data-service", url = "${data.service.url}")
 public interface DataServiceClient {
 
 // Producto

@@ -64,7 +64,6 @@ public class CategoriaBusinessService {
         }
     }
 
-    // Eliminar una categoría por su ID
     public void eliminarCategoria(Long id) {
         try {
             dataServiceClient.eliminarCategoria(id);
@@ -85,8 +84,6 @@ public class CategoriaBusinessService {
         }
     }
 
-
-    // Validaciones de negocio para categorías
     private void validarCategoria(CategoriaDTO categoriaDTO) {
         if (categoriaDTO.getNombre() == null || categoriaDTO.getNombre().isBlank()) {
             throw new ValidacionNegocioException("El nombre de la categoría no puede estar vacío");
