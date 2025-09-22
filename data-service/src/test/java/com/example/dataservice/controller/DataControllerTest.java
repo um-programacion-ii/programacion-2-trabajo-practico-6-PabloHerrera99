@@ -311,7 +311,7 @@ class DataControllerTest {
     void testCalcularValorTotal() throws Exception {
         when(inventarioService.calcularValorTotal()).thenReturn(BigDecimal.valueOf(1500));
 
-        mockMvc.perform(get("/data/Inventario/Valor-Total"))
+        mockMvc.perform(get("/data/inventario/Valor-Total"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("1500"));
     }
