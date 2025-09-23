@@ -109,8 +109,8 @@ Desarrollar un sistema de microservicios utilizando Spring Boot y Feign, impleme
 > 💡 **Nota**: Esta estimación considera la complejidad de configurar microservicios, comunicación entre servicios con Feign, múltiples bases de datos y Docker. El tiempo incluye el aprendizaje de conceptos de microservicios y Spring Cloud.
 
 ## 👨‍🎓 Información del Alumno
-- **Nombre y Apellido**: [Nombre y Apellido del Alumno]
-- **Legajo**: [Número de Legajo]
+- **Nombre y Apellido**: Herrera Pablo
+- **Legajo**: 60082
 
 > ⚠️ **IMPORTANTE**: Este trabajo práctico se realiza **INDIVIDUALMENTE**. Aunque se utilizan herramientas de colaboración como Pull Requests y Code Review, estas son para mantener buenas prácticas de desarrollo y un historial ordenado. Todo el desarrollo debe ser realizado por el mismo estudiante.
 
@@ -142,6 +142,211 @@ Desarrollar un sistema de microservicios utilizando Spring Boot y Feign, impleme
 - JUnit 5.10.1
 - Mockito 5.8.0
 - Git y GitHub
+
+# Instrucciones de Instalación
+## Clonar el Repositorio
+```bash
+git clone https://github.com/um-programacion-ii/programacion-2-trabajo-practico-5-PabloHerrera99.git
+cd programacion-2-trabajo-practico-5-PabloHerrera99
+```
+##Configurar Docker
+```bash
+docker compose up -d
+```
+##Ejecutar el Proyecto
+```bash
+# Con H2 (desarrollo)
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+# Con MySQL
+mvn spring-boot:run -Dspring-boot.run.profiles=mysql
+# Con PostgreSQL
+mvn spring-boot:run -Dspring-boot.run.profiles=postgres
+```
+##Ejecutar Tests
+
+```bash
+# Con H2 (desarrollo)
+mvn test -Dspring.profiles.active=dev
+# Con MySQL
+mvn test -Dspring.profiles.active=mysql
+# Con PostgreSQL
+mvn test -Dspring.profiles.active=postgres
+```
+# Documentación de Endpoints
+
+## Productos
+
+### Obtener todos los productos
+
+- **GET** `/productos`
+-  Retorna la lista de todos los productos.
+- **Respuestas**:
+    - `200 OK` → Lista de productos retornada correctamente.
+
+### Obtener producto por ID
+- **GET** `/productos/{id}`
+- Retorna un producto específico según su ID.
+- **Respuestas**:
+    - `200 OK` → Producto encontrado.
+    - `404 Not Found` → No existe un producto con el ID indicado.
+
+### Crear producto
+- **POST** `/productos`
+- Crea un nuevo producto.
+- **Body (JSON)**:
+```json
+{
+  "nombre": "Producto A",
+  "precio": 100.50,
+  "descripcion": "Descripción del producto",
+  "categoriaId": 1
+}
+```
+- **Respuestas**:
+  - `201 Created` → Producto creado exitosamente. 
+  - `400 Bad Request` → Datos inválidos
+
+## Actualizar producto
+- **PUT** `/productos/{id}`
+- Actualiza un producto existente según su ID. 
+- **Body (JSON)**:
+```json
+{
+  "nombre": "Producto A Editado",
+  "precio": 120.00,
+  "descripcion": "Nueva descripción",
+  "categoriaId": 1
+}
+```
+- **Respuestas**:
+  - `200 OK` → Producto actualizado exitosamente. 
+  - `404 Not Found` → No existe un producto con el ID indicado.
+
+### Eliminar producto
+- **DELETE** `/productos/{id}` 
+- Elimina un producto existente según su ID. 
+- **Respuestas**:
+  - `204 No Content` → Producto eliminado exitosamente.
+  - `404 Not Found` → No existe un producto con el ID indicado.
+
+## Categorías
+
+### Obtener todas las categorías
+- **GET** `/categorias`
+- Retorna la lista de todas las categorías.
+- **Respuestas**:
+    - `200 OK` → Lista de categorías retornada correctamente.
+
+### Obtener categoría por ID
+- **GET** `/categorias/id/{id}`
+- Retorna una categoría específica según su ID.
+- **Respuestas**:
+    - `200 OK` → Categoría encontrada.
+    - `404 Not Found` → No existe una categoría con el ID indicado.
+
+### Obtener categorías con productos
+- **GET** `/categorias/con-productos`
+- Retorna todas las categorías junto con sus productos asociados.
+- **Respuestas**:
+    - `200 OK` → Lista de categorías con productos retornada correctamente.
+
+### Crear categoría
+- **POST** `/categorias`
+- Crea una nueva categoría.
+- **Body (JSON)**:
+```json
+{
+  "nombre": "Electrónica",
+  "descripcion": "Artículos electrónicos"
+}
+```
+- **Respuestas**:
+  - `201 Created` → Categoría creada exitosamente.
+  - `400 Bad Request` → Datos inválidos.
+
+## Actualizar categoría
+- **PUT** `/categorias/{id}`
+- Actualiza una categoría existente. 
+- **Body (JSON)**:
+```json
+{
+  "nombre": "Electrodomésticos",
+  "descripcion": "Nuevos artículos"
+}
+```
+- **Respuestas**:
+  - `200 OK` → Categoría actualizada exitosamente.
+  - `404 Not Found` → No existe una categoría con el ID indicado.
+
+## Eliminar categoría
+- **DELETE** `/categorias/{id}`
+- Elimina una categoría existente.
+- **Respuestas**:
+  - `204 No Content` → Categoría eliminada exitosamente. 
+  - `404 Not Found` → No existe una categoría con el ID indicado.
+
+## Inventario
+
+### Obtener todos los inventarios
+- **GET** `/inventario`
+- Retorna la lista de todos los inventarios.
+- **Respuestas**:
+    - `200 OK` → Lista de inventarios retornada correctamente.
+
+### Obtener inventario por ID
+- **GET** `/inventario/{id}`
+- Retorna un inventario específico según su ID.
+- **Respuestas**:
+    - `200 OK` → Inventario encontrado.
+    - `404 Not Found` → No existe un inventario con el ID indicado.
+
+### Crear inventario
+- **POST** `/inventario`
+- Crea un nuevo registro de inventario.
+- **Body (JSON)**:
+```json
+{
+  "productoId": 1,
+  "cantidad": 50,
+  "ubicacion": "Depósito Central"
+}
+```
+- **Respuestas**:
+  - `201 Created` → Inventario creado exitosamente.
+  - `400 Bad Request` → Datos inválidos.
+
+### Actualizar inventario
+- **PUT** `/inventario/{id}`
+- Actualiza un inventario existente.
+- **Body (JSON)**:
+```json
+{
+  "productoId": 1,
+  "cantidad": 40,
+  "ubicacion": "Depósito Secundario"
+}
+```
+- **Respuestas**:
+  - `200 OK` → Inventario actualizado exitosamente. 
+  - `404 Not` Found → No existe un inventario con el ID indicado.
+### Eliminar inventario
+- **DELETE** `/inventario/{id}`
+- Elimina un inventario existente.
+- **Respuestas**:
+    - `204 No Content` → Inventario eliminado exitosamente.
+    - `404 Not Found` → No existe un inventario con el ID indicado.
+
+### Obtener productos con stock bajo
+- **GET** `/inventario/stock-bajo`
+- Retorna los productos cuyo stock está por debajo del mínimo.
+- **Respuestas**:
+    - `200 OK` → Lista de inventarios con stock bajo retornada correctamente.
+
+### Calcular valor total del inventario
+- **GET** `/inventario/Valor-Total`
+- Retorna el valor monetario total del inventario.
+- **Respuestas**:
+    - `200 OK` → Valor total calculado exitosamente.
 
 ## 📊 Casos de Uso del Sistema
 
