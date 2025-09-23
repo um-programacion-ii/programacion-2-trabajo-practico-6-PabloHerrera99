@@ -126,7 +126,7 @@ public class DataController {
         return inventarioService.obtenerProductosConStockBajo();
     }
 
-    @GetMapping("Inventario/Valor-Total")
+    @GetMapping("inventario/Valor-Total")
     public BigDecimal calcularValorTotal() {
         return inventarioService.calcularValorTotal();
     }

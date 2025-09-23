@@ -20,7 +20,7 @@ public class ProductoServiceImpl implements ProductoService{
 
     @Override
     public List<Producto> encontrarPorPrecioEntre(BigDecimal min, BigDecimal max){
-        return productoRepository.encontrarPorPrecioEntre(min, max);
+        return productoRepository.findByPrecioBetween(min, max);
     }
 
     @Override

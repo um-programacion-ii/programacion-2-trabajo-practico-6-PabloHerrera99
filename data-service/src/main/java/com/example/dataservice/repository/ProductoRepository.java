@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
-    List<Producto>  encontrarPorPrecioEntre(BigDecimal min, BigDecimal max);
+    List<Producto>  findByPrecioBetween(BigDecimal min, BigDecimal max);
 }
